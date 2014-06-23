@@ -16,6 +16,8 @@ if (!Array.prototype.indexOf) {
 }
 
 (function() {
+    
+    this.version = 0.1;
 
     /**
      * Instanciate DOM objects according to CSS selectors or specified element
