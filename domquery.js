@@ -12,12 +12,11 @@ if (!Array.prototype.indexOf) {
              if (this[i] === obj) { return i; }
          }
          return -1;
-    }
+    };
 }
-
 (function() {
     
-    this.version = 0.1;
+    this.version = '0.1.1';
 
     /**
      * Instanciate DOM objects according to CSS selectors or specified element
@@ -89,14 +88,19 @@ if (!Array.prototype.indexOf) {
 		/**
 		 * Add an event listener to each elements
 		**/
-		on: function(event, callback) {
+		on: function(events, callback) {
+            var events = events.split(/\s+/);
 			return this.each(function() {
-				if(this.addEventListener) {
-					this.addEventListener(event, callback, false);
-				}
-				else if(this.attachEvent) {
-					this.attachEvent('on'+event, callback);
-				}
+                
+                for(var i = 0, length = events.length; i < length; i++) {
+                    if(this.addEventListener) {
+                        this.addEventListener(events[i], callback, false);
+                    }
+                    else if(this.attachEvent) {
+                        this.attachEvent('on'+events[i], callback);
+                    }
+                }
+                
 			});
 		},
 		
